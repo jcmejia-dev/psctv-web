@@ -1,0 +1,160 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}
+
+/* Dark Mode Theme Variables */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8fafc;
+    --bg-tertiary: #f1f5f9;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+    --header-bg: rgba(255, 255, 255, 0.95);
+    --dropdown-bg: #ffffff;
+    --input-bg: #f8fafc;
+    --input-focus-bg: #ffffff;
+    --button-hover: #f1f5f9;
+    --status-healthy: #10b981;
+    --status-warning: #f59e0b;
+    --status-unhealthy: #ef4444;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f172a;
+    --bg-secondary: #1e293b;
+    --bg-tertiary: #334155;
+    --text-primary: #f8fafc;
+    --text-secondary: #cbd5e1;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --header-bg: rgba(15, 23, 42, 0.95);
+    --dropdown-bg: #1e293b;
+    --input-bg: #334155;
+    --input-focus-bg: #1e293b;
+    --button-hover: #334155;
+    --status-healthy: #10b981;
+    --status-warning: #f59e0b;
+    --status-unhealthy: #ef4444;
+}
+
+/* Theme Transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Header Dark Mode Styles */
+[data-theme="dark"] #mainHeader {
+    background: var(--header-bg);
+    backdrop-filter: blur(10px);
+    border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] #mainHeader .bg-white {
+    background: var(--bg-primary);
+}
+
+[data-theme="dark"] #mainHeader .text-gray-900 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] #mainHeader .text-gray-500 {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] #mainHeader .text-gray-600 {
+    color: var(--text-secondary);
+}
+
+[data-theme="dark"] #mainHeader .text-gray-800 {
+    color: var(--text-primary);
+}
+
+[data-theme="dark"] #mainHeader .bg-gray-50 {
+    background: var(--bg-secondary);
+}
+
+[data-theme="dark"] #mainHeader .bg-gray-100 {
+    background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] #mainHeader .border-gray-100 {
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] #mainHeader .border-gray-200 {
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] #mainHeader .text-gray-400 {
+    color: var(--text-muted);
+}
+
+[data-theme="dark"] #mainHeader .text-blue-600 {
+    color: #60a5fa;
+}
+
+[data-theme="dark"] #mainHeader .hover\:bg-gray-50:hover {
+    background: var(--bg-secondary);
+}
+
+[data-theme="dark"] #mainHeader .hover\:bg-gray-100:hover {
+    background: var(--bg-tertiary);
+}
+
+/* Dropdown Dark Mode */
+[data-theme="dark"] #mainHeader .shadow-xl {
+    box-shadow: 0 20px 25px -5px var(--shadow-color), 0 10px 10px -5px var(--shadow-color);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 280px;
+    height: 100vh;
+    background: var(--bg-primary);
+    box-shadow: -4px 0 20px var(--shadow-color);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.mobile-menu.active {
+    right: 0;
+}
+
+[data-theme="dark"] .mobile-menu {
+    background: var(--bg-primary);
+    border-left: 1px solid var(--border-color);
+}
