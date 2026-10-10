@@ -9,6 +9,7 @@
         }
     },
     "routes": [
+        { "src": "/", "dest": "/api/index.php" },
         { "src": "/(?:index\\.php|hot|build/manifest\\.json|build/\\.vite/.*)", "status": 404 },
         { "handle": "filesystem" },
         { "src": "/(.*)", "dest": "/api/index.php" }
