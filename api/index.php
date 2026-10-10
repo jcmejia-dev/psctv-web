@@ -10,6 +10,16 @@ foreach (['framework/cache/data', 'framework/sessions', 'framework/views', 'logs
     }
 }
 
+// The public portfolio preview must work without a provisioned database.
+// These can still be overridden by Vercel environment variables.
+foreach (['SESSION_DRIVER' => 'cookie', 'CACHE_STORE' => 'array', 'QUEUE_CONNECTION' => 'sync'] as $name => $default) {
+    if (getenv($name) === false) {
+        $_ENV[$name] = $default;
+        $_SERVER[$name] = $default;
+        putenv($name.'='.$default);
+    }
+}
+
 $_ENV['LARAVEL_STORAGE_PATH'] = $storagePath;
 $_SERVER['LARAVEL_STORAGE_PATH'] = $storagePath;
 putenv('LARAVEL_STORAGE_PATH='.$storagePath);
