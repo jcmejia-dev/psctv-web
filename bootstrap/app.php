@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         \App\Providers\EventServiceProvider::class,
     ])
     ->withMiddleware(function (Middleware $middleware) {
+        if (getenv('VERCEL')) {
+            $middleware->trustProxies(at: '*');
+        }
         // ✅ Custom middleware aliases
         $middleware->alias([
             'role' => \App\Http\Middleware\RoleMiddleware::class,

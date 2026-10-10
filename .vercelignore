@@ -1,0 +1,12 @@
+/.env
+/.env.*
+/vendor
+/node_modules
+/mobile
+/.git
+/storage/logs/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/public/hot
+/hot
+/gh.msi
