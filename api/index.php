@@ -1,5 +1,11 @@
 <?php
 
+// Send bootstrap failures to function logs without exposing them to visitors.
+ini_set('display_errors', '0');
+ini_set('log_errors', '1');
+ini_set('error_log', '/dev/stderr');
+error_reporting(E_ALL);
+
 // Vercel's application bundle is read-only; Laravel writes compiled views
 // and other temporary files under the function's writable /tmp directory.
 $storagePath = sys_get_temp_dir().'/psctv-storage';
@@ -28,4 +34,5 @@ $_SERVER['VIEW_COMPILED_PATH'] = $storagePath.'/framework/views';
 putenv('VIEW_COMPILED_PATH='.$storagePath.'/framework/views');
 
 require __DIR__.'/../public/index.php';
+
 
