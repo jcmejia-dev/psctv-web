@@ -33,6 +33,15 @@ $_ENV['VIEW_COMPILED_PATH'] = $storagePath.'/framework/views';
 $_SERVER['VIEW_COMPILED_PATH'] = $storagePath.'/framework/views';
 putenv('VIEW_COMPILED_PATH='.$storagePath.'/framework/views');
 
-require __DIR__.'/../public/index.php';
+try {
+    require __DIR__.'/../public/index.php';
+} catch (Throwable $exception) {
+    // Keep the first failure visible even when Laravel's error renderer fails.
+    for ($cause = $exception; $cause !== null; $cause = $cause->getPrevious()) {
+        error_log('PSCTV bootstrap: '.get_class($cause).': '.$cause->getMessage());
+    }
+    http_response_code(500);
+    echo 'The service is temporarily unavailable.';
+}
 
 
