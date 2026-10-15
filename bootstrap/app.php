@@ -31,6 +31,10 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->report(function (Throwable $exception) {
+            if (getenv('VERCEL')) {
+                error_log('PSCTV application: '.get_class($exception).': '.$exception->getMessage());
+            }
+        });
     })
     ->create();

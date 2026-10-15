@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 // Vercel's application bundle is read-only; Laravel writes compiled views
 // and other temporary files under the function's writable /tmp directory.
 $storagePath = sys_get_temp_dir().'/psctv-storage';
-foreach (['framework/cache/data', 'framework/sessions', 'framework/views', 'logs'] as $directory) {
+foreach (['framework/cache/data', 'framework/sessions', 'framework/views', 'bootstrap-cache', 'logs'] as $directory) {
     $path = $storagePath.'/'.$directory;
     if (!is_dir($path) && !mkdir($path, 0775, true) && !is_dir($path)) {
         throw new RuntimeException('Unable to create Laravel runtime directory.');
@@ -24,6 +24,14 @@ foreach (['SESSION_DRIVER' => 'cookie', 'CACHE_STORE' => 'array', 'QUEUE_CONNECT
         $_SERVER[$name] = $default;
         putenv($name.'='.$default);
     }
+}
+
+// Provider manifests also need writable paths before Laravel can boot.
+foreach (['APP_PACKAGES_CACHE' => 'packages.php', 'APP_SERVICES_CACHE' => 'services.php', 'APP_CONFIG_CACHE' => 'config.php', 'APP_ROUTES_CACHE' => 'routes.php', 'APP_EVENTS_CACHE' => 'events.php'] as $name => $file) {
+    $path = $storagePath.'/bootstrap-cache/'.$file;
+    $_ENV[$name] = $path;
+    $_SERVER[$name] = $path;
+    putenv($name.'='.$path);
 }
 
 $_ENV['LARAVEL_STORAGE_PATH'] = $storagePath;
